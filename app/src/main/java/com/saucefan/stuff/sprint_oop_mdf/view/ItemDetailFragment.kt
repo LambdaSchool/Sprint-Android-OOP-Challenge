@@ -75,10 +75,7 @@ interface onDetailChangeListener {
     }
 
     companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
+
         const val ARG_ITEM_ID = "item_id"
     }
 }

@@ -4,10 +4,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.saucefan.stuff.sprint_oop_mdf.R
-import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
-import com.saucefan.stuff.sprint_oop_mdf.model.Civlizations
-import com.saucefan.stuff.sprint_oop_mdf.model.Technology
-import com.saucefan.stuff.sprint_oop_mdf.model.Units
+import com.saucefan.stuff.sprint_oop_mdf.model.*
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository.AoeArrayList
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ApiInterface
@@ -107,6 +104,32 @@ class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavorite
                         }
 
                     })
+
+                for (i in 1 until number) {
+                    apiInterface.getStructure(Random.nextInt(1, 10).toString())
+                        .enqueue(object : Callback<Structures> {
+                            override fun onFailure(call: Call<Structures>, t: Throwable) {
+                                t.printStackTrace()
+                                val response = "faliure; ${t.message}"
+                                Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
+                                    .show()
+
+                            }
+
+                            override fun onResponse(
+                                call: Call<Structures>,
+                                response: Response<Structures>
+                            ) {
+                                val newstruc: Structures? = response.body()
+                                if (newstruc != null) {
+                                    AoeArrayList.add(newstruc)
+                                }
+
+
+                            }
+
+                        })
+                }
             }
         }
     }
