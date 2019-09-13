@@ -94,14 +94,14 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse 
         }
     }
     private fun getData(){
-        val structure = mutableListOf(1, 2, 3)
+        val structure = mutableListOf(1, 2, 3, 4 , 5, 6, 7 , 8, 9)
         structure.shuffle()
         structure.forEach {
 
             getStructures(it)
         }
 
-        val units = mutableListOf(1, 2, 3)
+        val units = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
         units.shuffle()
         units.forEach {
             getUnits(it)
