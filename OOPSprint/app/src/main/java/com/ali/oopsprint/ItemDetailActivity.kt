@@ -17,33 +17,16 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * in a [ItemListActivity].
  */
 class ItemDetailActivity : AppCompatActivity(),ItemDetailFragment.OnDetailsFragmentInteractionListener{
+
     override fun onDetailsFragmentInteraction(data: Hierarchy?) {
-        Toast.makeText(this, data?.description(), Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"${this.javaClass.getSimpleName()} - ${data?.description()}", Toast.LENGTH_LONG).show()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
-        setSupportActionBar(detail_toolbar)
 
-        val item =intent.getSerializableExtra(ItemDetailFragment.ARG_ITEM_ID) as Hierarchy
-
-        if(item?.favorite==true){
-            favourite_switch.isChecked=true
-        }
-        else
-            favourite_switch.isChecked=false
-
-        favourite_switch.setOnClickListener {
-            if(item?.favorite==false){
-                HierarchyPresenter.HierarchyList.hierarchy[item.index].favorite=true
-                favourite_switch.isChecked=true
-            }
-            else
-                HierarchyPresenter.HierarchyList.hierarchy[item.index].favorite=false
-            favourite_switch.isChecked=false
-
-        }
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

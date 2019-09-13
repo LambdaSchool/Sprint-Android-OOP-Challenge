@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.ali.oopsprint.dummy.DummyContent
 import com.ali.oopsprint.model.Hierarchy
+import com.ali.oopsprint.viewmodelpresenter.HierarchyPresenter
 import kotlinx.android.synthetic.main.activity_item_detail.*
+import kotlinx.android.synthetic.main.item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
+import kotlinx.android.synthetic.main.item_detail.view.favourite_switch
 
 /**
  * A fragment representing a single Item detail screen.
@@ -37,10 +40,6 @@ class ItemDetailFragment : Fragment() {
                 // to load content from a content provider.
                 item = it.getSerializable(ARG_ITEM_ID) as Hierarchy
                 activity?.toolbar_layout?.title = item?.name
-
-               /* favourite_switch.setOnClickListener {
-                    listener?.onDetailsFragmentInteraction(item)
-                }*/
             }
         }
     }
@@ -54,6 +53,26 @@ class ItemDetailFragment : Fragment() {
         // Show the dummy content as text in a TextView.
         item?.let {
             rootView.item_detail.text = it.description()
+
+        }
+        if(item?.favorite==true){
+            rootView.favourite_switch.isChecked=true
+        }
+        else
+            rootView.favourite_switch.isChecked=false
+
+        rootView.favourite_switch.setOnClickListener {
+            listener?.onDetailsFragmentInteraction(item)
+
+      if(item!=null)
+            if(item?.favorite==false){
+                HierarchyPresenter.HierarchyList.hierarchy[item?.index.toString().toInt()].favorite=true
+                rootView.favourite_switch.isChecked=true
+            }
+            else
+                HierarchyPresenter.HierarchyList.hierarchy[item?.index.toString().toInt()].favorite=false
+            rootView.favourite_switch.isChecked=false
+
         }
 
         return rootView
