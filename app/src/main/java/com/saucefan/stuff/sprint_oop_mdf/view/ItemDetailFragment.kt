@@ -1,10 +1,11 @@
-package com.saucefan.stuff.sprint_oop_mdf
+package com.saucefan.stuff.sprint_oop_mdf.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*

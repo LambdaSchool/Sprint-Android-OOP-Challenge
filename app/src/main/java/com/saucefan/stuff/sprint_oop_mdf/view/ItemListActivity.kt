@@ -1,4 +1,4 @@
-package com.saucefan.stuff.sprint_oop_mdf
+package com.saucefan.stuff.sprint_oop_mdf.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.saucefan.stuff.sprint_oop_mdf.R
 
 import com.saucefan.stuff.sprint_oop_mdf.dummy.DummyContent
+import com.saucefan.stuff.sprint_oop_mdf.model.Civlizations
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * An activity representing a list of Pings. This activity
@@ -55,7 +78,12 @@ class ItemListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        recyclerView.adapter =
+            SimpleItemRecyclerViewAdapter(
+                this,
+                DummyContent.ITEMS,
+                twoPane
+            )
     }
 
     class SimpleItemRecyclerViewAdapter(
