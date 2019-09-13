@@ -1,6 +1,6 @@
 package com.example.oopsprintchallenge
 
-import com.example.oopsprintchallenge.model.Civilization
+import com.example.oopsprintchallenge.model.Empire
 import com.example.oopsprintchallenge.model.Structure
 import com.example.oopsprintchallenge.model.Technology
 import com.google.gson.GsonBuilder
@@ -18,7 +18,7 @@ interface AOEAPI {
     }
 
     @GET("civilisations")
-    fun getCivillisations(): Call<List<Civilization>>
+    fun getCivillisations(): Call<List<Empire>>
 
     @GET("units")
     fun getUnits(): Call<List<Unit>>

@@ -1,7 +1,5 @@
 package com.example.oopsprintchallenge.model
 
-import android.nfc.tech.TagTechnology
-
 /*Build your model classes. The API we are using has endpoints for civilizations, units, structures, and technologies.
 We want to create a list containing all the different API objects,
 and we want to be able to display interesting data in our RecyclerView.
@@ -23,9 +21,9 @@ You can provide a default value of false.
  */
 
 //To reach for example Wood from an activity
-// reference to the data class Cost must be in CivilizationRepository(val cost: Cost)
+// reference to the data class Cost must be in EmpireRepository(val cost: Cost)
 
-abstract class CivilizationRepository(
+abstract class EmpireRepository(
     val id: Int?,
     val name: String?,
     val expansion: String?,
@@ -54,7 +52,7 @@ data class Cost(
 )
 
 
-class Civilization(
+class Empire(
     id: Int?,
     name: String?,
     expansion: String?,
@@ -64,7 +62,7 @@ class Civilization(
     private val unique_tech: MutableList<String>?,
     private val team_bonus: String?,
     private val civilization_bonus: MutableList<String>?
-) : CivilizationRepository(id, name, expansion, isFavorite) {
+) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
@@ -74,7 +72,7 @@ class Civilization(
                 "Unique unit: $unique_unit " +
                 "Unique tech: $unique_tech " +
                 "Team bonus: $team_bonus " +
-                "Civilization bonus: $civilization_bonus "
+                "Empire bonus: $civilization_bonus "
 
     }
 }
@@ -102,7 +100,7 @@ class Unit(
     private val search_radius: Int?,
     private val accuracy: String?,
     private val blast_radius: Int? //number?
-) : CivilizationRepository(id, name, expansion, isFavorite) {
+) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
@@ -146,7 +144,7 @@ class Structure(
     private val reload_time: Int?,    //number?
     private val attack: Int?,
     private val special: MutableList<String>?
-) : CivilizationRepository(id, name, expansion, isFavorite) {
+) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
 
         return "ID: $id " +
@@ -178,7 +176,7 @@ class Technology(
     private val cost: Cost?,
     private val build_time: Int?,
     private val applies_to: MutableList<String>?
-) : CivilizationRepository(id, name, expansion, isFavorite) {
+) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
