@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.oopsprintchallenge.R
 
-import com.example.oopsprintchallenge.model.CivilizationContent
+import com.example.oopsprintchallenge.model.AOEContent
 import com.example.oopsprintchallenge.view.ItemDetailActivity
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
@@ -60,14 +60,14 @@ class ItemListActivity : AppCompatActivity() {
         recyclerView.adapter =
             SimpleItemRecyclerViewAdapter(
                 this,
-                CivilizationContent.ITEMS,
+                AOEContent.ITEMS,
                 twoPane
             )
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: List<CivilizationContent.DummyItem>,
+        private val values: List<AOEContent.DummyItem>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -76,7 +76,7 @@ class ItemListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as CivilizationContent.DummyItem
+                val item = v.tag as AOEContent.DummyItem
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
