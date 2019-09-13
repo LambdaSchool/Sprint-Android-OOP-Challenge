@@ -1,5 +1,6 @@
 package com.example.aoe.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.aoe.R
 import com.example.aoe.dummy.DummyContent
+import com.example.aoe.viewModel.AOEobject
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -21,7 +23,7 @@ class ItemDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item: DummyContent.DummyItem? = null
+    private var item: AOEobject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +33,13 @@ class ItemDetailFragment : Fragment() {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+               item = it.getSerializable(ARG_ITEM_ID) as AOEobject
+                val item = it.getSerializable(ARG_ITEM_ID) as AOEobject
+                activity?.toolbar_layout?.let { layout ->
+
+                    //TODO 1 I changed this for testing the info display on fragment
+                    layout.title = item?.info() ?: " "
+                }
             }
         }
     }
@@ -44,12 +51,35 @@ class ItemDetailFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
         // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.item_detail.text = it.details
+        rootView.send.setOnClickListener {
+            responseObject?.provideInfoForObject(item?.info() ?: "No info was found!")
         }
-
         return rootView
     }
+    interface DetailResponse{
+        fun provideInfoForObject(info: String)
+    }
+    private var responseObject: DetailResponse? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is DetailResponse){
+            responseObject = context
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        responseObject = null
+    }
+    fun sendInfo(view: View){
+        responseObject?.provideInfoForObject(item?.info() ?: "No info found to send information!")
+    }
+
+
+
+
+
+
 
     companion object {
         /**

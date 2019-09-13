@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.aoe.R
+import com.example.aoe.viewModel.AOEobject
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -14,12 +16,18 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse {
+    override fun provideInfoForObject(info: String) {
+        Toast.makeText(this, "We got this info from the detail fragment: \n" +
+                "$info", Toast.LENGTH_LONG).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
+
+        val AoEobject = (intent.getSerializableExtra(ItemDetailFragment.ARG_ITEM_ID))as AOEobject
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
@@ -43,9 +51,9 @@ class ItemDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = ItemDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(
+                    putSerializable(
                         ItemDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID)
+                        intent.getSerializableExtra(ItemDetailFragment.ARG_ITEM_ID)
                     )
                 }
             }
