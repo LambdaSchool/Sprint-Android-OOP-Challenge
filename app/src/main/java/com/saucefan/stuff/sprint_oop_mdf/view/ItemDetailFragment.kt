@@ -1,27 +1,52 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.saucefan.stuff.sprint_oop_mdf.R
-import com.saucefan.stuff.sprint_oop_mdf.dummy.DummyContent
+import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a [ItemListActivity]
- * in two-pane mode (on tablets) or a [ItemDetailActivity]
- * on handsets.
- */
 class ItemDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private var item: DummyContent.DummyItem? = null
+    private var item: AoeTypes?= null
+    /* ArrayListVehicles.ITEMS
+                            ArrayListVehicles.ITEM_MAP
+                            ArrayListVehicles.vehicleArrayList*/
+
+
+    interface Favorite {
+        fun flipFavorite(item:AoeTypes,context: Context) {
+            // so we get here from the map, but the recycler view take the array -- and that just seems crumbly
+            //my peronsal toolbox doesn't really know how to handle this well so i'm gonna settle for just handling it at all right now
+            fun toastPop(message:String) {
+                Toast.makeText(context,"flipfavorites $message", Toast.LENGTH_SHORT).show()
+            }
+            for (i in 0 until AoeRepository.ArrayListVehicles.vehicleArrayList.size) {
+                if (AoeRepository.ArrayListVehicles.vehicleArrayList[i] == item ){
+                    if (item.isFavorite){
+
+                        item.isFavorite = false
+                        toastPop("$item is now unfavorited -- item. favorite value=${item.isFavorite} (and should be false)")
+                        break
+                    }else {
+                        item.isFavorite = true
+                        toastPop("$item is now favorited --item. favorite value=${item.isFavorite} (and should be true)")
+                        break
+                    }
+                }
+
+            }
+
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +56,8 @@ class ItemDetailFragment : Fragment() {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+                item = AoeRepository.ArrayListVehicles.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+                activity?.toolbar_layout?.title = item?.id.toString()
             }
         }
     }
@@ -45,8 +70,10 @@ class ItemDetailFragment : Fragment() {
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.item_detail.text = it.details
+            rootView.item_detail.text = it.show()
+
         }
+
 
         return rootView
     }

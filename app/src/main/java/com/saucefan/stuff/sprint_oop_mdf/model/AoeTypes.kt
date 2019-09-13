@@ -22,7 +22,11 @@ abstract class AoeTypes(
 
 //civilizations don't have this
     val age: String? = null
-    )
+    ) {
+    fun show():String {
+        return "$name, is at id:$id and is it a favorite? $isFavorite"
+    }
+}
 
 class Civlizations(
     id: Int,
@@ -33,21 +37,23 @@ class Civlizations(
 class Structures(
     id: Int,
     name: String,
-    age: String
+    age: String,
+    build_time:Int
 ) : AoeTypes(id, name, false, age)
+
 
 class Units(
     id: Int,
     name: String,
     age: String,
-    description: String
+    val description: String
 ) : AoeTypes(id, name, false, age)
 
 class Technology(
     id: Int,
     name: String,
     age: String,
-    description: String
+    val description: String
 ) : AoeTypes(id, name, false, age)
 
 

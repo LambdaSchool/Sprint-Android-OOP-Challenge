@@ -2,10 +2,12 @@ package com.saucefan.stuff.sprint_oop_mdf.view
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.saucefan.stuff.sprint_oop_mdf.R
+import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.model.Structures
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -14,7 +16,8 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +25,8 @@ class ItemDetailActivity : AppCompatActivity() {
         setSupportActionBar(detail_toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            var item = AoeRepository.ArrayListVehicles.ITEM_MAP[intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID) as String] ?: Structures(1,"fail","fail",500)
+            flipFavorite(item, this)
         }
 
         // Show the Up button in the action bar.

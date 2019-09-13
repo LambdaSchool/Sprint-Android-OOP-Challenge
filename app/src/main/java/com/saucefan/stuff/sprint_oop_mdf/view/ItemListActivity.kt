@@ -1,42 +1,21 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
-
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.saucefan.stuff.sprint_oop_mdf.R
-
-import com.saucefan.stuff.sprint_oop_mdf.dummy.DummyContent
-import com.saucefan.stuff.sprint_oop_mdf.model.Civlizations
+import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository.ArrayListVehicles.buildList
 import kotlinx.android.synthetic.main.activity_item_list.*
-import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import kotlinx.android.synthetic.main.item_list_content.view.*
 
 /**
  * An activity representing a list of Pings. This activity
@@ -78,17 +57,13 @@ class ItemListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter =
-            SimpleItemRecyclerViewAdapter(
-                this,
-                DummyContent.ITEMS,
-                twoPane
-            )
+        buildList()
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, AoeRepository.ArrayListVehicles.vehicleArrayList, twoPane)
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: List<DummyContent.DummyItem>,
+        private val values: List<AoeTypes>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -97,11 +72,12 @@ class ItemListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
+                val item = v.tag as AoeTypes
+
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id.toString())
                         }
                     }
                     parentActivity.supportFragmentManager
@@ -125,12 +101,16 @@ class ItemListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.idView.text = item.id.toString()
+            holder.contentView.text = item.show()
 
+            if (item.isFavorite){
+                holder.contentView.setBackgroundColor(ContextCompat.getColor(holder.contentView.context,R.color.highlight))
+            }else holder.contentView.setBackgroundColor(ContextCompat.getColor(holder.contentView.context,R.color.background))
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
+
             }
         }
 
