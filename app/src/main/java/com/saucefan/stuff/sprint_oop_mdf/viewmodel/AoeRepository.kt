@@ -15,7 +15,20 @@ object  ArrayListVehicles
             Units(8,"also chariots", "further back","only 1/2 horse power")
 
         )
-
+        fun swapArrayFave(item:AoeTypes):String {
+            for (i in 0 .. AoeArrayList.size-1) {
+                if (item.name==AoeArrayList[i].name){
+                    if (AoeArrayList[i].isFavorite){
+                        AoeArrayList[i].isFavorite=false
+                        return AoeArrayList[i].isFavorite.toString()
+                    } else{
+                        AoeArrayList[i].isFavorite=true
+                        return AoeArrayList[i].isFavorite.toString()
+                    }
+                }
+            }
+            return "couldn't find it"
+        }
 
 
         var ITEMS: MutableList<AoeTypes> = AoeArrayList

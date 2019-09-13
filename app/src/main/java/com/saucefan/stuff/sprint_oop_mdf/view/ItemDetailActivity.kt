@@ -1,28 +1,35 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 import com.saucefan.stuff.sprint_oop_mdf.R
-import com.saucefan.stuff.sprint_oop_mdf.model.Structures
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.ITEM_MAP
+import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.swapArrayFave
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 
-class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
+class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavoriteListener {
+    override fun flipFavorite(item: AoeTypes) {
 
-//lateinit var attachedActivity
+            swapArrayFave(item)
+            Toast.makeText(this,"isFavorite: swapArrayFave(item)", Toast.LENGTH_LONG).show()
+
+    }
+
+    //lateinit var attachedActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener { view ->
-            var item = ITEM_MAP[intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID) as String] ?: Structures(1,"fail","fail",500)
-            flipFavorite(item, this)
-        }
 
+       /*     var item = ITEM_MAP[intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID) as String] ?: Structures(1,"fail","fail",500)
+            flipFavorite(item, this)
+
+*/
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,18 +58,5 @@ class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            android.R.id.home -> {
-                // This ID represents the Home or Up button. In the case of this
-                // activity, the Up button is shown. For
-                // more details, see the Navigation pattern on Android Design:
-                //
-                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
 
-                navigateUpTo(Intent(this, ItemListActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
 }

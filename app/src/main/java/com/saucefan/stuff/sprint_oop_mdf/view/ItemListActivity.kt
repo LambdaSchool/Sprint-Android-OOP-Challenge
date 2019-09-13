@@ -1,16 +1,19 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.AoeArrayList
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.buildList
 import kotlinx.android.synthetic.main.activity_item_list.*
@@ -25,13 +28,25 @@ import kotlinx.android.synthetic.main.item_list_content.view.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class ItemListActivity : AppCompatActivity() {
+class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavoriteListener {
+    override fun flipFavorite(item: AoeTypes) {
+
+        ArrayListVehicles.swapArrayFave(item)
+        Toast.makeText(this,"isFavorite: swapArrayFave(item)", Toast.LENGTH_LONG).show()
+
+    }
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+
     private var twoPane: Boolean = false
+    /*override fun onResumeFragments() {
+        recyclerView.adapter?.notifyDataSetChanged() ?: Toast.makeText(this,"recycleview issues, onresume main activity",Toast.LENGTH_SHORT).show()
+
+        super.onResumeFragments()
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

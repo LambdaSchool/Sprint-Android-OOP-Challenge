@@ -34,7 +34,7 @@ abstract class AoeTypes(
 //civilizations don't have this
     val age: String? = null
     ) : Serializable {
-    fun show():String {
+    open fun show():String {
         return "$name, is at id:$id and is it a favorite? $isFavorite"
     }
 }
@@ -44,15 +44,21 @@ class Civlizations(
     name: String,
     val army_type: String
 ) : AoeTypes(id, name) {
-
+   override fun show():String {
+       return "$name.   $age.  Army type:$army_type . $isFavorite/$id"
+    }
 }
 
 class Structures(
     id: Int,
     name: String,
     age: String,
-    build_time:Int
-) : AoeTypes(id, name, false, age)
+    val build_time:Int
+) : AoeTypes(id, name, false, age) {
+    override fun show():String {
+        return "$name.   $age.  build time: ${build_time.toString()} . $isFavorite/$id "
+    }
+}
 
 
 class Units(
@@ -60,14 +66,22 @@ class Units(
     name: String,
     age: String,
     val description: String
-) : AoeTypes(id, name, false, age)
+) : AoeTypes(id, name, false, age) {
+    override fun show():String {
+        return "$name.   $age.  $description. $isFavorite/$id "
+    }
+}
 
 class Technology(
     id: Int,
     name: String,
     age: String,
     val description: String
-) : AoeTypes(id, name, false, age)
+) : AoeTypes(id, name, false, age) {
+    override fun show():String {
+        return "$name.   $age.  $description. $isFavorite/$id "
+    }
+}
 
 
 
