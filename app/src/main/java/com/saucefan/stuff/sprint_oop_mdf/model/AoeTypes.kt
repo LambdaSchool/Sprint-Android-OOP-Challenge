@@ -45,7 +45,7 @@ class Civlizations(
     val army_type: String
 ) : AoeTypes(id, name) {
    override fun show():String {
-       return "$name.  Army type:$army_type, $isFavorite/$id"
+       return "$name.  Army type:$army_type, $isFavorite/$id/C"
     }
 }
 
@@ -56,7 +56,7 @@ class Structures(
     val build_time:Int
 ) : AoeTypes(id, name, false, age) {
     override fun show():String {
-        return "$name.   $age.  build time: ${build_time.toString()} . $isFavorite/$id "
+        return "$name.   $age.  build time: ${build_time.toString()} . $isFavorite/$id/S "
     }
 }
 
@@ -69,7 +69,7 @@ class Units(
     val hit_points:String
 ) : AoeTypes(id, name, false, age) {
     override fun show():String {
-        return "$name.   $age.  $description. hit_points: $hit_points $isFavorite/$id "
+        return "$name.   $age.  $description. hit_points: $hit_points $isFavorite/$id/U"
     }
 }
 
@@ -80,7 +80,7 @@ class Technology(
     val description: String
 ) : AoeTypes(id, name, false, age) {
     override fun show():String {
-        return "$name.   $age.  $description. $isFavorite/$id "
+        return "$name.   $age.  $description. $isFavorite/$id/T "
     }
 }
 

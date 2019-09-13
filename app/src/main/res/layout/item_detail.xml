@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_foreground"
+    android:background="@color/cardview_shadow_end_color"
     android:id="@+id/relativelayout"
     >
     <TextView
@@ -22,4 +22,5 @@
         android:id="@+id/btn_favorite"
         android:layout_below="@id/item_detail"
         />
+
 </RelativeLayout>

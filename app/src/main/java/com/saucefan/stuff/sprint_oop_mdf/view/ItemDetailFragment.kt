@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
 import kotlinx.android.synthetic.main.activity_item_detail.*
@@ -16,17 +17,15 @@ import kotlinx.android.synthetic.main.item_detail.view.*
 class ItemDetailFragment : Fragment() {
 
 
+
     var item: AoeTypes?= null
-var listener:FragmentFavoriteListener? =null
+    var listener:FragmentFavoriteListener? =null
     /* AoeRepository.ITEMS
                             AoeRepository.ITEM_MAP
                             AoeRepository.AoeArrayList*/
 
-interface onDetailChangeListener {
-    fun updateItem(item:AoeTypes)
-}
-    interface FragmentFavoriteListener {
 
+    interface FragmentFavoriteListener {
         fun flipFavorite(item:AoeTypes)
     }
 
@@ -65,6 +64,7 @@ interface onDetailChangeListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn_favorite.setOnClickListener{
             listener?.flipFavorite(item as AoeTypes)
+
         }
         super.onViewCreated(view, savedInstanceState)
     }

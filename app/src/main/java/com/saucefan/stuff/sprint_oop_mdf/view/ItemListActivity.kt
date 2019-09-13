@@ -1,6 +1,8 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -16,14 +18,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.random.Random
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ItemDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 
 
 class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavoriteListener {
@@ -156,16 +150,27 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
         super.onResumeFragments()
     }*/
 
+
+    override fun onResume() {
+        super.onResume()
+
+        item_list.adapter?.notifyDataSetChanged()?: Toast.makeText(this,"recycle issue onresume itemlist", Toast.LENGTH_SHORT)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
-        setSupportActionBar(toolbar)
-        toolbar.title = "Aoe oop sprint challenge"
-
+        title = "Aoe oop sprint challenge"
+        var manager:RecyclerView?= item_list
+        manager?.adapter = SimpleItemRecyclerViewAdapter(this, twoPane)
 
         fab.setOnClickListener { view ->
             makeAoeList(6)
             setupRecyclerView(item_list)
+            val handler = Handler(Looper.getMainLooper())
+            //wait a few seconds and try to refresh recycleview
+            handler.postDelayed({
+                item_list.adapter?.notifyDataSetChanged() ?: Toast.makeText(this,"recycle issue oncreate itemlist", Toast.LENGTH_SHORT).show()
+            }, 3000)
         }
 
         if (item_detail_container != null) {
@@ -175,12 +180,12 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
         //    setupRecyclerView(item_list)
 
 
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 
-        var manager = item_list
-        manager.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
+
 
     }
 

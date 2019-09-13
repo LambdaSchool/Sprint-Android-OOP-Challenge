@@ -10,21 +10,16 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository.AoeArrayList
 import kotlinx.android.synthetic.main.item_list_content.view.*
 
 class SimpleItemRecyclerViewAdapter(
     private val parentActivity: ItemListActivity,
-    private val values: List<AoeTypes>,
     private val twoPane: Boolean
 ) :
-    RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>(),
-    ItemDetailFragment.onDetailChangeListener {
-
+    RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
     private val onClickListener: View.OnClickListener
-    override fun updateItem(item: AoeTypes) {
-        //todo make this respond to which item is changed not a global refresh
-        notifyDataSetChanged()
-    }
+
 
     init {
 
@@ -58,7 +53,7 @@ class SimpleItemRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
+        val item = AoeArrayList[position]
         holder.idView.text = item.id.toString()
         holder.contentView.text = item.show()
 
@@ -76,7 +71,7 @@ class SimpleItemRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount() = values.size
+    override fun getItemCount() = AoeArrayList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.id_text
