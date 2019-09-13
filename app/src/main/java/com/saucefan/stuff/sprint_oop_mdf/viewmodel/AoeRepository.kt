@@ -20,10 +20,10 @@ object  ArrayListVehicles
                 if (item.name==AoeArrayList[i].name){
                     if (AoeArrayList[i].isFavorite){
                         AoeArrayList[i].isFavorite=false
-                        return AoeArrayList[i].isFavorite.toString()
+                        return "${AoeArrayList[i].name} isfavorite is ${AoeArrayList[i].isFavorite}"
                     } else{
                         AoeArrayList[i].isFavorite=true
-                        return AoeArrayList[i].isFavorite.toString()
+                        return "${AoeArrayList[i].name} isfavorite is ${AoeArrayList[i].isFavorite}"
                     }
                 }
             }
@@ -33,19 +33,11 @@ object  ArrayListVehicles
 
         var ITEMS: MutableList<AoeTypes> = AoeArrayList
 
-        var ITEM_MAP: MutableMap<String, AoeTypes> = HashMap()
 
 
-        fun buildList() {
-            ITEM_MAP = HashMap()
 
-            for (i in 0..AoeArrayList.size -1) {
-                addItem(AoeArrayList[i])
-            }
-        }
-        private fun addItem(item: AoeTypes) {
-            if (item.id != null) {
-                ITEM_MAP.put(item.id.toString(), item)
-            }
-        }
+
+
+
+
     }

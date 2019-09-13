@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.AoeArrayList
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.buildList
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
@@ -28,12 +28,13 @@ import kotlinx.android.synthetic.main.item_list_content.view.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
+ lateinit var manager:RecyclerView
+
 class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavoriteListener {
     override fun flipFavorite(item: AoeTypes) {
 
         ArrayListVehicles.swapArrayFave(item)
         Toast.makeText(this,"isFavorite: swapArrayFave(item)", Toast.LENGTH_LONG).show()
-
     }
 
     /**
@@ -53,11 +54,10 @@ class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavorite
         setContentView(R.layout.activity_item_list)
 
         setSupportActionBar(toolbar)
-        toolbar.title = title
+        toolbar.title = "Aoe oop sprint challenge"
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
         }
 
         if (item_detail_container != null) {
@@ -72,8 +72,9 @@ class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavorite
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        buildList()
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
+        var manager =recyclerView
+        manager.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
+
     }
 
     class SimpleItemRecyclerViewAdapter(
