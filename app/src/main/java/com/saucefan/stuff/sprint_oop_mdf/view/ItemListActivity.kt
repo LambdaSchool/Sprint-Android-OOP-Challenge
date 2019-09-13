@@ -1,4 +1,5 @@
 package com.saucefan.stuff.sprint_oop_mdf.view
+
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,7 @@ import kotlin.random.Random
  */
 
 
-class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavoriteListener {
+class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavoriteListener {
 
 
     fun makeAoeList(number: Int) {
@@ -53,85 +54,87 @@ class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavorite
                     }
 
                 })
-
-            for (i in 1 until number) {
-                apiInterface.getUnit(Random.nextInt(1, 10).toString())
-                    .enqueue(object : Callback<Units> {
-                        override fun onFailure(call: Call<Units>, t: Throwable) {
-                            t.printStackTrace()
-                            val response = "faliure; ${t.message}"
-                            Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
-                                .show()
-
-                        }
-
-                        override fun onResponse(
-                            call: Call<Units>,
-                            response: Response<Units>
-                        ) {
-                            val newunit: Units? = response.body()
-                            if (newunit != null) {
-                                AoeArrayList.add(newunit)
-                            }
-
-
-                        }
-
-                    })
-            }
-
-            for (i in 1 until number) {
-                apiInterface.getTech(Random.nextInt(1, 10).toString())
-                    .enqueue(object : Callback<Technology> {
-                        override fun onFailure(call: Call<Technology>, t: Throwable) {
-                            t.printStackTrace()
-                            val response = "faliure; ${t.message}"
-                            Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
-                                .show()
-
-                        }
-
-                        override fun onResponse(
-                            call: Call<Technology>,
-                            response: Response<Technology>
-                        ) {
-                            val newtech: Technology? = response.body()
-                            if (newtech != null) {
-                                AoeArrayList.add(newtech)
-                            }
-
-
-                        }
-
-                    })
-
-                for (i in 1 until number) {
-                    apiInterface.getStructure(Random.nextInt(1, 10).toString())
-                        .enqueue(object : Callback<Structures> {
-                            override fun onFailure(call: Call<Structures>, t: Throwable) {
-                                t.printStackTrace()
-                                val response = "faliure; ${t.message}"
-                                Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
-                                    .show()
-
-                            }
-
-                            override fun onResponse(
-                                call: Call<Structures>,
-                                response: Response<Structures>
-                            ) {
-                                val newstruc: Structures? = response.body()
-                                if (newstruc != null) {
-                                    AoeArrayList.add(newstruc)
-                                }
-
-
-                            }
-
-                        })
-                }
-            }
         }
+
+
+        for (i in 1 until number) {
+            apiInterface.getUnit(Random.nextInt(1, 10).toString())
+                .enqueue(object : Callback<Units> {
+                    override fun onFailure(call: Call<Units>, t: Throwable) {
+                        t.printStackTrace()
+                        val response = "faliure; ${t.message}"
+                        Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
+                            .show()
+
+                    }
+
+                    override fun onResponse(
+                        call: Call<Units>,
+                        response: Response<Units>
+                    ) {
+                        val newunit: Units? = response.body()
+                        if (newunit != null) {
+                            AoeArrayList.add(newunit)
+                        }
+
+
+                    }
+
+                })
+        }
+
+        for (i in 1 until number) {
+            apiInterface.getTech(Random.nextInt(1, 10).toString())
+                .enqueue(object : Callback<Technology> {
+                    override fun onFailure(call: Call<Technology>, t: Throwable) {
+                        t.printStackTrace()
+                        val response = "faliure; ${t.message}"
+                        Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
+                            .show()
+
+                    }
+
+                    override fun onResponse(
+                        call: Call<Technology>,
+                        response: Response<Technology>
+                    ) {
+                        val newtech: Technology? = response.body()
+                        if (newtech != null) {
+                            AoeArrayList.add(newtech)
+                        }
+
+
+                    }
+
+                })
+        }
+
+        for (i in 1 until number) {
+            apiInterface.getStructure(Random.nextInt(1, 10).toString())
+                .enqueue(object : Callback<Structures> {
+                    override fun onFailure(call: Call<Structures>, t: Throwable) {
+                        t.printStackTrace()
+                        val response = "faliure; ${t.message}"
+                        Toast.makeText(this@ItemListActivity, response, Toast.LENGTH_SHORT)
+                            .show()
+
+                    }
+
+                    override fun onResponse(
+                        call: Call<Structures>,
+                        response: Response<Structures>
+                    ) {
+                        val newstruc: Structures? = response.body()
+                        if (newstruc != null) {
+                            AoeArrayList.add(newstruc)
+                        }
+
+
+                    }
+
+                })
+        }
+
     }
 
 
@@ -171,14 +174,14 @@ class ItemListActivity : AppCompatActivity(),ItemDetailFragment.FragmentFavorite
             twoPane = true
         }
 
-    //    setupRecyclerView(item_list)
-        var apiInterface = ApiInterface.Factory.create()
+        //    setupRecyclerView(item_list)
+
         setupRecyclerView(item_list)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         var manager = item_list
-        manager.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList,twoPane)
+        manager.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
 
     }
 

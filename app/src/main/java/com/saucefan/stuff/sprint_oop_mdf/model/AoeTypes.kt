@@ -45,7 +45,7 @@ class Civlizations(
     val army_type: String
 ) : AoeTypes(id, name) {
    override fun show():String {
-       return "$name.  Army type:$army_type . $isFavorite/$id"
+       return "$name.  Army type:$army_type, $isFavorite/$id"
     }
 }
 
@@ -65,10 +65,11 @@ class Units(
     id: Int,
     name: String,
     age: String,
-    val description: String
+    val description: String,
+    val hit_points:String
 ) : AoeTypes(id, name, false, age) {
     override fun show():String {
-        return "$name.   $age.  $description. $isFavorite/$id "
+        return "$name.   $age.  $description. hit_points: $hit_points $isFavorite/$id "
     }
 }
 
