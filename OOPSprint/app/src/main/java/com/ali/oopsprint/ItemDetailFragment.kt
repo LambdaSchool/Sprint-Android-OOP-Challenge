@@ -1,11 +1,13 @@
 package com.ali.oopsprint
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ali.oopsprint.dummy.DummyContent
+import com.ali.oopsprint.model.Hierarchy
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -20,7 +22,10 @@ class ItemDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item: DummyContent.DummyItem? = null
+    private var item: Hierarchy? = null
+
+
+    private var listener: OnDetailsFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +35,12 @@ class ItemDetailFragment : Fragment() {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+                item = it.getSerializable(ARG_ITEM_ID) as Hierarchy
+                activity?.toolbar_layout?.title = item?.name
+
+               /* favourite_switch.setOnClickListener {
+                    listener?.onDetailsFragmentInteraction(item)
+                }*/
             }
         }
     }
@@ -44,7 +53,7 @@ class ItemDetailFragment : Fragment() {
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.item_detail.text = it.details
+            rootView.item_detail.text = it.description()
         }
 
         return rootView
@@ -57,4 +66,15 @@ class ItemDetailFragment : Fragment() {
          */
         const val ARG_ITEM_ID = "item_id"
     }
+    interface OnDetailsFragmentInteractionListener {
+        fun onDetailsFragmentInteraction(data: Hierarchy?)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnDetailsFragmentInteractionListener) {
+            listener = context
+        }
+    }
+
 }

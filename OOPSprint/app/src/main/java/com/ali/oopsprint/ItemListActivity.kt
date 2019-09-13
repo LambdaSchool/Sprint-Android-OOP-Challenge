@@ -11,6 +11,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.ali.oopsprint.dummy.DummyContent
+import com.ali.oopsprint.model.Civilization
+import com.ali.oopsprint.model.Hierarchy
+import com.ali.oopsprint.viewmodelpresenter.HierarchyPresenter
+import com.ali.oopsprint.viewmodelpresenter.HierarchyPresenter.HierarchyList
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
@@ -38,6 +42,17 @@ class ItemListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
+        HierarchyList.hierarchy.add(HierarchyPresenter.civilization_1)
+        HierarchyList.hierarchy.add(HierarchyPresenter.civilization_2)
+        HierarchyList.hierarchy.add(HierarchyPresenter.unit_1)
+        HierarchyList.hierarchy.add(HierarchyPresenter.unit_2)
+        HierarchyList.hierarchy.add(HierarchyPresenter.structure_1)
+        HierarchyList.hierarchy.add(HierarchyPresenter.structure_2)
+        HierarchyList.hierarchy.add(HierarchyPresenter.technology_1)
+        HierarchyList.hierarchy.add(HierarchyPresenter.technology_2)
+
+
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -55,12 +70,12 @@ class ItemListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, HierarchyList.hierarchy, twoPane)
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: List<DummyContent.DummyItem>,
+        private val values: List<Hierarchy>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -69,11 +84,11 @@ class ItemListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
+                val item = v.tag as Hierarchy
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                            putSerializable(ItemDetailFragment.ARG_ITEM_ID, item)
                         }
                     }
                     parentActivity.supportFragmentManager
@@ -82,7 +97,7 @@ class ItemListActivity : AppCompatActivity() {
                         .commit()
                 } else {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
                     }
                     v.context.startActivity(intent)
                 }
@@ -97,8 +112,8 @@ class ItemListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.idView.text = "ID:${item.id}"
+            holder.contentView.text = item.description()
 
             with(holder.itemView) {
                 tag = item

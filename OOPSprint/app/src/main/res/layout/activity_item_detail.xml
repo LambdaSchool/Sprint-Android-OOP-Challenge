@@ -41,14 +41,17 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <Switch
+        android:id="@+id/favourite_switch"
+        android:text="Favourtie"
+        android:textStyle="bold"
+        android:checked="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
+        android:paddingTop="20dp"
         app:layout_anchor="@+id/item_detail_container"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        app:layout_anchorGravity="top|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
