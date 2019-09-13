@@ -73,7 +73,6 @@ class ItemListActivity : AppCompatActivity() {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as AoeTypes
-
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
@@ -86,7 +85,7 @@ class ItemListActivity : AppCompatActivity() {
                         .commit()
                 } else {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id.toString())
                     }
                     v.context.startActivity(intent)
                 }

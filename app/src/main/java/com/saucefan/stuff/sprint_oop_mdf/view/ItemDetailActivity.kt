@@ -9,15 +9,10 @@ import com.saucefan.stuff.sprint_oop_mdf.model.Structures
 import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.ITEM_MAP
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
-/**
- * An activity representing a single Item detail screen. This
- * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a [ItemListActivity].
- */
+
 class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
 
-
+//lateinit var attachedActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
