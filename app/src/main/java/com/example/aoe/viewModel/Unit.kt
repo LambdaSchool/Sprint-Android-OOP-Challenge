@@ -1,5 +1,7 @@
 package com.example.aoe.viewModel
 
+import android.text.style.LineHeightSpan
+import android.text.style.MaskFilterSpan
 import com.google.gson.annotations.SerializedName
 
 /*   "id": 0,
@@ -8,16 +10,17 @@ import com.google.gson.annotations.SerializedName
       "expansion": "string",
       "teamBonus": "string",*/
 data class Unit(
-    override var name: String,
-    @SerializedName("armyType") val description: String,
-    @SerializedName("expansion") val expansion: String,
-    @SerializedName("teamBonus") val age: String
+    val height: String,
+    val mass: String,
+    @SerializedName("hair_color") val hairColor: String,
+    @SerializedName("skin_color") val skinColor: String,
+    @SerializedName("eye_color") val eyeColor: String
 ): AOEobject (){
 
-    override fun info(): String = "This is the overridden name: $name, $description, as well as $expansion and $age"
+    override fun info(): String = "This is the overridden name: $name, $hairColor, as well as $skinColor and $eyeColor"
 
     override fun toString(): String {
-        return "This is the overridden name: $name, $description, as well as $expansion and $age"
+        return "This is the overridden name: $name, $hairColor, as well as $skinColor and $eyeColor"
     }
 
 }

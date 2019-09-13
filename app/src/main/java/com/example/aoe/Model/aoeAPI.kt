@@ -3,47 +3,47 @@ package com.example.aoe.Model
 import com.example.aoe.viewModel.Structure
 import com.example.aoe.viewModel.Unit
 import okhttp3.OkHttpClient
+
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-interface aoeAPI {
+interface AoeAPI {
 
-    @GET("Find_civilization_by_id/{id}")
-    fun getStructures(@Path("id")id: Int): Call<Structure>
+    @GET("people/{id}")
+    fun getStructures(@Path("id") id: Int): Call<Structure>
 
-    @GET("Find_unit_by_id/{id}")
-    fun getUnits(@Path("id")id: Int): Call<Unit>
+    @GET("starships/{id}")
+    fun getUnits(@Path("id") id: Int): Call<Unit>
 
     class Factory {
 
         companion object {
 
-            private const val BASE_URL = "https://teamBonus-of-empires-2-api.herokuapp.com/docs/#/resources/"
+            private const val BASE_URL = "https://swapi.co/api/"
 
-            fun create(): aoeAPI {
-               val logger = HttpLoggingInterceptor()
+            fun create(): AoeAPI {
+              val logger = HttpLoggingInterceptor()
                 logger.level = HttpLoggingInterceptor.Level.BASIC
 
                 val okHttpClient = OkHttpClient.Builder()
-                    .addInterceptor(logger)
-                    .retryOnConnectionFailure(false)
-                    .readTimeout(10, TimeUnit.SECONDS)
+                  .addInterceptor(logger)
+                   .retryOnConnectionFailure(false)
+                   .readTimeout(10, TimeUnit.SECONDS)
                     .connectTimeout(15, TimeUnit.SECONDS)
-                    .build()
+                   .build()
 
                 val retrofit = Retrofit.Builder()
-                    .client(okHttpClient)
+                   .client(okHttpClient)
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-                return retrofit.create(aoeAPI::class.java)
+                return retrofit.create(AoeAPI::class.java)
             }
         }
     }

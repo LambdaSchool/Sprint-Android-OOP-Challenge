@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
-import com.example.aoe.Model.aoeAPI
+import com.example.aoe.Model.AoeAPI
 import com.example.aoe.R
 
 import com.example.aoe.viewModel.AOEobject
@@ -48,7 +48,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse 
 
     //set up API var
     var AOeobjects = mutableListOf<AOEobject>()
-    lateinit var aoeapi: aoeAPI
+    lateinit var aoeapi: AoeAPI
     private var viewAdapter: SimpleItemRecyclerViewAdapter? = null
 
 
@@ -73,7 +73,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse 
             // activity should be in two-pane mode.
             twoPane = true
         }
-        aoeapi = aoeAPI.Factory.create()
+        aoeapi = AoeAPI.Factory.create()
 
 
         setupRecyclerView(item_list as RecyclerView)
@@ -94,6 +94,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse 
         val structure = mutableListOf(1, 2, 3)
         structure.shuffle()
         structure.forEach {
+
             getStructures(it)
         }
 
