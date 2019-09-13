@@ -20,6 +20,7 @@ import com.example.aoe.viewModel.AOEobject
 import com.example.aoe.viewModel.Structure
 import com.example.aoe.viewModel.Unit
 import kotlinx.android.synthetic.main.activity_item_list.*
+import kotlinx.android.synthetic.main.item_detail.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
 import retrofit2.Call
@@ -38,6 +39,8 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.DetailResponse 
     override fun provideInfoForObject(info: String) {
         Toast.makeText(this, "We got this info from the detail fragment: \n" +
                 "$info", Toast.LENGTH_LONG).show()
+
+        item_text.text = "$info"
     }
 
     /**

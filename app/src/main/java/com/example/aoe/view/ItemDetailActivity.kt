@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.aoe.R
 import com.example.aoe.viewModel.AOEobject
 import kotlinx.android.synthetic.main.activity_item_detail.*
+import kotlinx.android.synthetic.main.item_detail.*
 
 /**
  * An activity representing a single Item detail screen. This
@@ -20,6 +21,8 @@ class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.DetailRespons
     override fun provideInfoForObject(info: String) {
         Toast.makeText(this, "We got this info from the detail fragment: \n" +
                 "$info", Toast.LENGTH_LONG).show()
+
+        item_text.text = "$info"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

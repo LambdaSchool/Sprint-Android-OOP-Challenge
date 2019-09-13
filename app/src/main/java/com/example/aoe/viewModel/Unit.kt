@@ -20,7 +20,7 @@ data class Unit(
     override fun info(): String = "This is the overridden name: $name, $hairColor, as well as $skinColor and $eyeColor"
 
     override fun toString(): String {
-        return "This is the overridden name: $name, $hairColor, as well as $skinColor and $eyeColor"
+        return   "This is the overridden name: $name, $hairColor, as well as $skinColor and $eyeColor"
     }
 
 }
