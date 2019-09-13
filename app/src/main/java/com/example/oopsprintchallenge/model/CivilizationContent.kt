@@ -1,4 +1,4 @@
-package com.example.oopsprintchallenge.dummy
+package com.example.oopsprintchallenge.model
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -9,7 +9,7 @@ import java.util.HashMap
  *
  * TODO: Replace all uses of this class before publishing your app.
  */
-object DummyContent {
+object CivilizationContent {
 
     /**
      * An array of sample (dummy) items.
@@ -26,7 +26,11 @@ object DummyContent {
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createDummyItem(i))
+            addItem(
+                createDummyItem(
+                    i
+                )
+            )
         }
     }
 
@@ -36,7 +40,11 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Item " + position, makeDetails(position))
+        return DummyItem(
+            position.toString(),
+            "Item " + position,
+            makeDetails(position)
+        )
     }
 
     private fun makeDetails(position: Int): String {
