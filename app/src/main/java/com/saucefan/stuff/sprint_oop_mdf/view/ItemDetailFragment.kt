@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.AoeArrayList
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.ITEM_MAP
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -18,7 +19,7 @@ class ItemDetailFragment : Fragment() {
     private var item: AoeTypes?= null
     /* ArrayListVehicles.ITEMS
                             ArrayListVehicles.ITEM_MAP
-                            ArrayListVehicles.vehicleArrayList*/
+                            ArrayListVehicles.AoeArrayList*/
 
 
     interface Favorite {
@@ -28,8 +29,8 @@ class ItemDetailFragment : Fragment() {
             fun toastPop(message:String) {
                 Toast.makeText(context,"flipfavorites $message", Toast.LENGTH_SHORT).show()
             }
-            for (i in 0 until AoeRepository.ArrayListVehicles.vehicleArrayList.size) {
-                if (AoeRepository.ArrayListVehicles.vehicleArrayList[i] == item ){
+            for (i in 0 until AoeArrayList.size) {
+                if (AoeArrayList[i] == item ){
                     if (item.isFavorite){
 
                         item.isFavorite = false
@@ -56,7 +57,7 @@ class ItemDetailFragment : Fragment() {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = AoeRepository.ArrayListVehicles.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+                item = ITEM_MAP[it.getString(ARG_ITEM_ID)]
                 activity?.toolbar_layout?.title = item?.id.toString()
             }
         }

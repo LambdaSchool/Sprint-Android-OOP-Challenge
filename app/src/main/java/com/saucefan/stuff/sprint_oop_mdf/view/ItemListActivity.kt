@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository.ArrayListVehicles.buildList
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.AoeArrayList
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.buildList
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
@@ -58,7 +58,7 @@ class ItemListActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         buildList()
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, AoeRepository.ArrayListVehicles.vehicleArrayList, twoPane)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
     }
 
     class SimpleItemRecyclerViewAdapter(

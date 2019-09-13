@@ -1,47 +1,38 @@
 package com.saucefan.stuff.sprint_oop_mdf.viewmodel
 
-class AoeRepository() {
+import com.saucefan.stuff.sprint_oop_mdf.model.*
 
-    package com.saucefan.stuff.m02.model
+object  ArrayListVehicles
+     {
+        val AoeArrayList = arrayListOf<AoeTypes>(
+            Structures(1,"big place","dark age",500),
+            Structures(2,"smallplace","new age",400),
+            Technology(3,"catapult design","middle age","i dunno somethin"),
+            Technology(4,"more catapults","late middle age","another descrip"),
+            Civlizations(5,"egypt or whatever","big chariot army"),
+            Civlizations(6,"byzantine","probably also chariots"),
+            Units(7,"Chariots","way back","they got wheels and 1 horse power"),
+            Units(8,"also chariots", "further back","only 1/2 horse power")
 
-    object ArrayListVehicles {
-        val vehicleArrayList = arrayListOf<Vehicle>(
-            Helicopter("1"),
-            Boat("2"),
-            BondCar(id = "007", weight = "v heavy"),
-            BoatCar("3"),
-            Car("4"),
-            BoatPlane("5", "3 hundo"),
-
-            Helicopter("11"),
-            Boat("222"),
-            BondCar("008", "light as a feather"),
-            BoatCar("23"),
-            Car("14"),
-            BoatPlane("32", "55 hundo")
         )
 
 
 
-        var ITEMS: MutableList<Vehicle> = vehicleArrayList
+        var ITEMS: MutableList<AoeTypes> = AoeArrayList
 
-        var ITEM_MAP: MutableMap<String, Vehicle> = HashMap()
+        var ITEM_MAP: MutableMap<String, AoeTypes> = HashMap()
 
-        init {
-
-        }
 
         fun buildList() {
             ITEM_MAP = HashMap()
 
-            for (i in 0..vehicleArrayList.size -1) {
-                addItem(vehicleArrayList[i])
+            for (i in 0..AoeArrayList.size -1) {
+                addItem(AoeArrayList[i])
             }
         }
-        private fun addItem(item: Vehicle) {
+        private fun addItem(item: AoeTypes) {
             if (item.id != null) {
-                ITEM_MAP.put(item.id, item)
+                ITEM_MAP.put(item.id.toString(), item)
             }
         }
     }
-}

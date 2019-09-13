@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.saucefan.stuff.sprint_oop_mdf.R
-import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
 import com.saucefan.stuff.sprint_oop_mdf.model.Structures
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.ITEM_MAP
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -25,7 +24,7 @@ class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
         setSupportActionBar(detail_toolbar)
 
         fab.setOnClickListener { view ->
-            var item = AoeRepository.ArrayListVehicles.ITEM_MAP[intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID) as String] ?: Structures(1,"fail","fail",500)
+            var item = ITEM_MAP[intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID) as String] ?: Structures(1,"fail","fail",500)
             flipFavorite(item, this)
         }
 
