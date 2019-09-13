@@ -12,10 +12,7 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
 
 class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavoriteListener {
     override fun flipFavorite(item: AoeTypes) {
-
-            swapArrayFave(item)
-            Toast.makeText(this,"isFavorite: swapArrayFave(item)", Toast.LENGTH_LONG).show()
-
+            Toast.makeText(this,"${swapArrayFave(item)}isFavorite: swapArrayFave(item)", Toast.LENGTH_LONG).show()
     }
 
     //lateinit var attachedActivity

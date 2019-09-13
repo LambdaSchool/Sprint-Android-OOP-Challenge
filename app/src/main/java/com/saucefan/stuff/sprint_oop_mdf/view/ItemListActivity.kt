@@ -32,7 +32,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
     fun makeAoeList(number: Int) {
         var apiInterface = ApiInterface.Factory.create()
         for (i in 1 until number) {
-            apiInterface.getCiv(Random.nextInt(1, 10).toString())
+            apiInterface.getCiv(Random.nextInt(1, 15).toString())
                 .enqueue(object : Callback<Civlizations> {
                     override fun onFailure(call: Call<Civlizations>, t: Throwable) {
                         t.printStackTrace()
@@ -58,7 +58,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
 
 
         for (i in 1 until number) {
-            apiInterface.getUnit(Random.nextInt(1, 10).toString())
+            apiInterface.getUnit(Random.nextInt(1, 15).toString())
                 .enqueue(object : Callback<Units> {
                     override fun onFailure(call: Call<Units>, t: Throwable) {
                         t.printStackTrace()
@@ -84,7 +84,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
         }
 
         for (i in 1 until number) {
-            apiInterface.getTech(Random.nextInt(1, 10).toString())
+            apiInterface.getTech(Random.nextInt(1, 15).toString())
                 .enqueue(object : Callback<Technology> {
                     override fun onFailure(call: Call<Technology>, t: Throwable) {
                         t.printStackTrace()
@@ -110,7 +110,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
         }
 
         for (i in 1 until number) {
-            apiInterface.getStructure(Random.nextInt(1, 10).toString())
+            apiInterface.getStructure(Random.nextInt(1, 15).toString())
                 .enqueue(object : Callback<Structures> {
                     override fun onFailure(call: Call<Structures>, t: Throwable) {
                         t.printStackTrace()
@@ -133,17 +133,15 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
                     }
 
                 })
+        setupRecyclerView(item_list)
         }
 
     }
 
 
     override fun flipFavorite(item: AoeTypes) {
+        Toast.makeText(this, "isFavorite: ${item.name} ${AoeRepository.swapArrayFave(item)}", Toast.LENGTH_LONG).show()
 
-        AoeRepository.swapArrayFave(item)
-        Toast.makeText(this, "isFavorite: i)", Toast.LENGTH_LONG).show()
-
-        //   manager.adapter?.notifyDataSetChanged()
     }
 
     /**
@@ -164,9 +162,9 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
         setSupportActionBar(toolbar)
         toolbar.title = "Aoe oop sprint challenge"
 
-        makeAoeList(4)
-        fab.setOnClickListener { view ->
 
+        fab.setOnClickListener { view ->
+            makeAoeList(6)
             setupRecyclerView(item_list)
         }
 
@@ -176,10 +174,11 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.FragmentFavorit
 
         //    setupRecyclerView(item_list)
 
-        setupRecyclerView(item_list)
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
+
         var manager = item_list
         manager.adapter = SimpleItemRecyclerViewAdapter(this, AoeArrayList, twoPane)
 
