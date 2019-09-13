@@ -18,13 +18,16 @@ class ItemDetailFragment : Fragment() {
 
     var item: AoeTypes?= null
 var listener:FragmentFavoriteListener? =null
-    /* ArrayListVehicles.ITEMS
-                            ArrayListVehicles.ITEM_MAP
-                            ArrayListVehicles.AoeArrayList*/
+    /* AoeRepository.ITEMS
+                            AoeRepository.ITEM_MAP
+                            AoeRepository.AoeArrayList*/
 
-
+interface onDetailChangeListener {
+    fun updateItem(item:AoeTypes)
+}
     interface FragmentFavoriteListener {
-    fun flipFavorite(item:AoeTypes)
+
+        fun flipFavorite(item:AoeTypes)
     }
 
     override fun onAttach(context: Context) {

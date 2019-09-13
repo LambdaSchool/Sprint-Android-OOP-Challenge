@@ -6,8 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.saucefan.stuff.sprint_oop_mdf.R
 import com.saucefan.stuff.sprint_oop_mdf.model.AoeTypes
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles
-import com.saucefan.stuff.sprint_oop_mdf.viewmodel.ArrayListVehicles.swapArrayFave
+import com.saucefan.stuff.sprint_oop_mdf.viewmodel.AoeRepository.swapArrayFave
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 

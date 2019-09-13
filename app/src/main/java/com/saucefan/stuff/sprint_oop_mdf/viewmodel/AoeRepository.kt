@@ -1,10 +1,16 @@
 package com.saucefan.stuff.sprint_oop_mdf.viewmodel
 
+import android.widget.Toast
 import com.saucefan.stuff.sprint_oop_mdf.model.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.random.Random
 
-object  ArrayListVehicles
+object  AoeRepository
      {
-        val AoeArrayList = arrayListOf<AoeTypes>(
+         var AoeArrayList = mutableListOf<AoeTypes>()
+    /*           val AoeArrayList = mutableListOf(
             Structures(1,"big place","dark age",500),
             Structures(2,"smallplace","new age",400),
             Technology(3,"catapult design","middle age","i dunno somethin"),
@@ -14,9 +20,9 @@ object  ArrayListVehicles
             Units(7,"Chariots","way back","they got wheels and 1 horse power"),
             Units(8,"also chariots", "further back","only 1/2 horse power")
 
-        )
+        )*/
         fun swapArrayFave(item:AoeTypes):String {
-            for (i in 0 .. AoeArrayList.size-1) {
+            for (i in 0 until AoeArrayList.size) {
                 if (item.name==AoeArrayList[i].name){
                     if (AoeArrayList[i].isFavorite){
                         AoeArrayList[i].isFavorite=false
@@ -31,13 +37,6 @@ object  ArrayListVehicles
         }
 
 
-        var ITEMS: MutableList<AoeTypes> = AoeArrayList
 
 
-
-
-
-
-
-
-    }
+         }
