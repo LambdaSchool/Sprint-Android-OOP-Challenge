@@ -1,5 +1,16 @@
 package com.saucefan.stuff.sprint_oop_mdf.model
 
+
+import java.io.Serializable
+
+/*
+*
+* TODO: change maping type from id to the name as it is much more likely to be unique, leave for now as this change makes me nervous
+*
+*
+* */
+
+
 /*
 so we know
 everything has an
@@ -22,7 +33,7 @@ abstract class AoeTypes(
 
 //civilizations don't have this
     val age: String? = null
-    ) {
+    ) : Serializable {
     fun show():String {
         return "$name, is at id:$id and is it a favorite? $isFavorite"
     }
@@ -32,7 +43,9 @@ class Civlizations(
     id: Int,
     name: String,
     val army_type: String
-) : AoeTypes(id, name)
+) : AoeTypes(id, name) {
+
+}
 
 class Structures(
     id: Int,

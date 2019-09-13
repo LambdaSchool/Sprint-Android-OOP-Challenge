@@ -40,10 +40,8 @@ class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.Favorite {
             // using a fragment transaction.
             val fragment = ItemDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(
-                        ItemDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID)
-                    )
+                    var item = intent.getSerializableExtra("detailview")
+                    putSerializable("detailview", item)
                 }
             }
 

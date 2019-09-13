@@ -76,6 +76,7 @@ class ItemListActivity : AppCompatActivity() {
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
+                            putSerializable("detailview", item)
                             putString(ItemDetailFragment.ARG_ITEM_ID, item.id.toString())
                         }
                     }
@@ -85,6 +86,7 @@ class ItemListActivity : AppCompatActivity() {
                         .commit()
                 } else {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
+                        putExtra("detailview", item)
                         putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id.toString())
                     }
                     v.context.startActivity(intent)

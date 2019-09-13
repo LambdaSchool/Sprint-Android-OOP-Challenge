@@ -16,7 +16,12 @@ import kotlinx.android.synthetic.main.item_detail.view.*
 
 class ItemDetailFragment : Fragment() {
 
-    private var item: AoeTypes?= null
+
+
+
+
+
+    var item: AoeTypes?= null
     /* ArrayListVehicles.ITEMS
                             ArrayListVehicles.ITEM_MAP
                             ArrayListVehicles.AoeArrayList*/
@@ -53,11 +58,8 @@ class ItemDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                item = ITEM_MAP[it.getString(ARG_ITEM_ID)]
+            if (it.containsKey("detailview")) {
+                item = it.getSerializable("detailview") as AoeTypes
                 activity?.toolbar_layout?.title = item?.id.toString()
             }
         }
