@@ -2,12 +2,11 @@ package com.example.oopsprintchallenge.view
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import com.example.oopsprintchallenge.viewModel.ItemDetailFragment
-import com.example.oopsprintchallenge.viewModel.ItemListActivity
+import android.widget.Toast
 import com.example.oopsprintchallenge.R
+import com.example.oopsprintchallenge.model.EmpireRepository
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -16,17 +15,34 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.OnItemDetailFragmentListener {
+    //Spent a life time trying to figure out why favorited wouldn't appear when I clicked the favorite button
+    // Just had an A-AHHHHHHHHHHHHH moment, I no longer want to die.....I will live
+
+    override fun onItemDetailInteraction(data: EmpireRepository) {
+        if (data.isFavorite){
+            val fav = "Favorited"
+            Toast.makeText(this@ItemDetailActivity, "You Beauty ${data.name} is now $fav",
+                Toast.LENGTH_LONG).show()
+        }else{
+            val fav = "Not Favorited"
+            Toast.makeText(this@ItemDetailActivity, "You Made Me Cry ${data.name} is  $fav",
+                Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener { view ->
+        /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

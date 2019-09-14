@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        google()
+    }
+
 }
 
 dependencies {
@@ -47,5 +52,9 @@ dependencies {
     //Picasso
     def picassoVersion = "2.71828"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //Constraint layout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
 
 }

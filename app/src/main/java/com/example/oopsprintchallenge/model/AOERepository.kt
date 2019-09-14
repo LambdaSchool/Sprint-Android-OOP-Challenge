@@ -51,38 +51,40 @@ data class Cost(
     val Gold: Int?
 )
 
+//In the get functions have commented out code as they are for my stretch goals
 
-class Empire(
+class Civilization(
     id: Int?,
     name: String?,
     expansion: String?,
-    isFavorite: Boolean = false,
+    isFavorite: Boolean = false/*,
     private val army_type: String?,
     private val unique_unit: MutableList<String>?,
     private val unique_tech: MutableList<String>?,
     private val team_bonus: String?,
-    private val civilization_bonus: MutableList<String>?
+    private val civilization_bonus: MutableList<String>?*/
 ) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
-                "Expansion: $expansion " +
-                "Favorite True or False: $isFavorite " +
+                "Expansion: $expansion "
+                 /*+
                 "Army Type: $army_type " +
                 "Unique unit: $unique_unit " +
                 "Unique tech: $unique_tech " +
                 "Team bonus: $team_bonus " +
-                "Empire bonus: $civilization_bonus "
+                "Civilization bonus: $civilization_bonus "*/
 
     }
 }
 
-class Unit(
+class Units(
     id: Int?,
     name: String?,
     expansion: String?,
     isFavorite: Boolean = false,
-    private val description: String?,
+    private val description: String?/*,
+
     private val age: String?,
     private val created_in: String?,
     private val cost: Cost?,
@@ -99,14 +101,13 @@ class Unit(
     private val armor_bonus: MutableList<String>?,
     private val search_radius: Int?,
     private val accuracy: String?,
-    private val blast_radius: Int? //number?
+    private val blast_radius: Int? //number?*/
 ) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
                 "Expansion: $expansion " +
-                "Favorite True or False: $isFavorite " +
-                "Description: $description " +
+                "Description: $description " /*+
                 "Age: $age " +
                 "Created: $created_in " +
                 "Cost: $cost " +
@@ -123,7 +124,7 @@ class Unit(
                 "Armor Bonus: $armor_bonus " +
                 "Search Radius: $search_radius " +
                 "Accuracy: $accuracy " +
-                "Blast Radius: $blast_radius "
+                "Blast Radius: $blast_radius "*/
 
     }
 }
@@ -133,8 +134,7 @@ class Structure(
     name: String?,
     expansion: String?,
     isFavorite: Boolean = false,
-    private val description: String?,
-    private val age: String?,
+   private val age: String?/*,
     private val cost: Cost?,
     private val build_time: Int?,
     private val hit_points: Int?,
@@ -143,15 +143,13 @@ class Structure(
     private val range: String?,
     private val reload_time: Int?,    //number?
     private val attack: Int?,
-    private val special: MutableList<String>?
+    private val special: MutableList<String>?*/
 ) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
 
         return "ID: $id " +
                 "Name: $name " +
-                "Expansion: $expansion " +
-                "Favorite True or False: $isFavorite " +
-                "Description $description " +
+                "Expansion: $expansion " /*+
                 "Age: $age " +
                 "Cost: $cost " +
                 "Build Time: $build_time " +
@@ -161,7 +159,7 @@ class Structure(
                 "Range: $range " +
                 "Reload Time: $reload_time " +
                 "Attack: $attack " +
-                "Special: $special"
+                "Special: $special"*/
     }
 }
 
@@ -170,24 +168,23 @@ class Technology(
     name: String?,
     expansion: String?,
     isFavorite: Boolean = false,
-    private val description: String?,
+    private val description: String?/*,
     private val age: String?,
     private val develops_in: String?,
     private val cost: Cost?,
     private val build_time: Int?,
-    private val applies_to: MutableList<String>?
+    private val applies_to: MutableList<String>?*/
 ) : EmpireRepository(id, name, expansion, isFavorite) {
     override fun getDetails(): String {
         return "ID: $id " +
                 "Name: $name " +
                 "Expansion: $expansion " +
-                "Favorite True or False: $isFavorite " +
-                "Description: $description " +
-                "Age: $age " +
+                "Description: $description " /*+
+               "Age: $age " +
                 "Develops In: $develops_in " +
                 "Cost: $cost " +
                 "Build Time: $build_time " +
-                "Applies To: $applies_to "
+                "Applies To: $applies_to "*/
 
     }
 }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".viewModel.ItemListActivity"
+            android:name=".view.ItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,11 +22,11 @@
         <activity
             android:name=".view.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".viewModel.ItemListActivity"
+            android:parentActivityName=".view.ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.oopsprintchallenge.viewModel.ItemListActivity" />
+                android:value="com.example.oopsprintchallenge.view.ItemListActivity" />
         </activity>
     </application>
 

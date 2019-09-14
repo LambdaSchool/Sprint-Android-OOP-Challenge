@@ -1,6 +1,6 @@
-package com.example.oopsprintchallenge
+package com.example.oopsprintchallenge.retrofit
 
-import com.example.oopsprintchallenge.model.Empire
+import com.example.oopsprintchallenge.model.Civilization
 import com.example.oopsprintchallenge.model.Structure
 import com.example.oopsprintchallenge.model.Technology
 import com.google.gson.GsonBuilder
@@ -18,7 +18,7 @@ interface AOEAPI {
     }
 
     @GET("civilisations")
-    fun getCivillisations(): Call<List<Empire>>
+    fun getCivillisations(): Call<List<Civilization>>
 
     @GET("units")
     fun getUnits(): Call<List<Unit>>
@@ -30,7 +30,7 @@ interface AOEAPI {
     fun getStructures(): Call<List<Structure>>
 
 
-    fun create(): AOEAPI{
+    fun create(): AOEAPI {
         val gson = GsonBuilder()
             .setLenient() // if you use set lenient you can ignore properties of json
             .create()

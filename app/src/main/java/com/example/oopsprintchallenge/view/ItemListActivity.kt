@@ -1,18 +1,18 @@
-package com.example.oopsprintchallenge.viewModel
+package com.example.oopsprintchallenge.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.oopsprintchallenge.R
+import com.example.oopsprintchallenge.model.EmpireRepository
 
-import com.example.oopsprintchallenge.model.AOEContent
-import com.example.oopsprintchallenge.view.ItemDetailActivity
+import com.example.oopsprintchallenge.viewModel.TempItemList
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
@@ -25,7 +25,19 @@ import kotlinx.android.synthetic.main.item_list.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class ItemListActivity : AppCompatActivity() {
+class ItemListActivity : AppCompatActivity(),
+    ItemDetailFragment.OnItemDetailFragmentListener {
+    override fun onItemDetailInteraction(data: EmpireRepository) {
+        if (data.isFavorite){
+            val fav = "Favorited"
+            Toast.makeText(this@ItemListActivity, "You Beauty you ${data.name} is now $fav",
+                Toast.LENGTH_LONG).show()
+        }else{
+            val fav = "Not Favorited"
+            Toast.makeText(this@ItemListActivity, "You Made Me Cry ${data.name} is  $fav",
+                Toast.LENGTH_LONG).show()
+        }
+    }
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -40,10 +52,10 @@ class ItemListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        fab.setOnClickListener { view ->
+       /* fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
 
         if (item_detail_container != null) {
             // The detail container view will be present only in the
@@ -60,14 +72,14 @@ class ItemListActivity : AppCompatActivity() {
         recyclerView.adapter =
             SimpleItemRecyclerViewAdapter(
                 this,
-                AOEContent.ITEMS,
+                TempItemList.empireList,
                 twoPane
             )
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ItemListActivity,
-        private val values: List<AOEContent.DummyItem>,
+        private val values: List<EmpireRepository>,
         private val twoPane: Boolean
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
@@ -76,11 +88,11 @@ class ItemListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as AOEContent.DummyItem
+                val item = v.tag as EmpireRepository
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                            putString(ItemDetailFragment.ARG_ITEM_ID, item.name)//I am sure this is the reason my fragment wasn't displaying correctly let's see
                         }
                     }
                     parentActivity.supportFragmentManager
@@ -89,7 +101,7 @@ class ItemListActivity : AppCompatActivity() {
                         .commit()
                 } else {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.name)// Kill me, it was both this one and the one above
                     }
                     v.context.startActivity(intent)
                 }
@@ -104,8 +116,8 @@ class ItemListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.idView.text = item.name
+            holder.contentView.text = item.getDetails()
 
             with(holder.itemView) {
                 tag = item
