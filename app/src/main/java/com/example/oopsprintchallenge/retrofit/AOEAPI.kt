@@ -26,7 +26,7 @@ interface AOEAPI {
     @GET("technologies")
     fun getTechnologies(): Call<List<Technology>>
 
-    @GET("structure")
+    @GET("structures")
     fun getStructures(): Call<List<Structure>>
 
 

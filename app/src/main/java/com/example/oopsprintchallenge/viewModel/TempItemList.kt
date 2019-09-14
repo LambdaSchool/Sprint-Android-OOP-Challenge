@@ -24,8 +24,8 @@ object TempItemList {
         empireList.add(Civilization(1,"Aztecs", "The Conquerors",
             false ))
         empireList.add(Civilization(2,"Britons", "Age of Kings",
-            true ))
-        empireList.add(Units(1, "Archer", "Age of Kings", true,
+            false ))
+        empireList.add(Units(1, "Archer", "Age of Kings", false,
             "Quick and light. Weak at close range; excels at battle from distance"))
         empireList.add(Units(2, "Crossbowman", "Age of Kings", false,
             "Upgraded archer"))

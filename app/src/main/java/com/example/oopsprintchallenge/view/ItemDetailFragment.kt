@@ -88,13 +88,11 @@ class ItemDetailFragment : Fragment() {
             Go to your layout files and add a TextView or other UI element to display the description you have created (item_list_content.xml and item_detail.xml are good places).
             Also add UI to display and change the state you have added. You might use a Button, an ImageView, a CheckBox, or something else of your choosing,
             just make sure you can both change the value of the object and display the value after it has changed.*/
-            item?.isFavorite = true
+
+            item!!.isFavorite = true
             if (item!!.isFavorite){
-
                rootView.text_view_fav.text = getString(R.string.This_is_Favorited)
-
             }else{
-
                 rootView.text_view_fav.text = getString(R.string.not_favorited) //This simple logic wasted an amount of my life that I would be embarassed to tell anyone
             }
 
