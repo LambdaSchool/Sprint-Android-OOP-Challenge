@@ -42,8 +42,7 @@ abstract class AoeTypes(
 class Civlizations(
     id: Int,
     name: String,
-    val army_type: String
-) : AoeTypes(id, name) {
+    val army_type: String) : AoeTypes(id, name) {
    override fun show():String {
        return "$name.  Army type:$army_type, $isFavorite/$id/C"
     }
